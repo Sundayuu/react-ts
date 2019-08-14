@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-
+import './test.less'
 export default class Test extends Component<any, any> {
   render() {
-    return <div>测试</div>
+    return <div className="test">测试</div>
   }
 }

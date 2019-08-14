@@ -45,11 +45,12 @@ const imageInlineSizeLimit = parseInt(
 const useTypeScript = fs.existsSync(paths.appTsConfig)
 
 // style files regexes
-const cssRegex = /\.css$/
+const cssRegex = /\.(css|less)$/
 const cssModuleRegex = /\.module\.css$/
 const sassRegex = /\.(scss|sass)$/
 const sassModuleRegex = /\.module\.(scss|sass)$/
-
+const lessRegex = /\.(less)$/
+const lessModuleRegex = /\.module|antd\.less$/
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
 module.exports = function(webpackEnv) {
@@ -86,6 +87,9 @@ module.exports = function(webpackEnv) {
       {
         loader: require.resolve('css-loader'),
         options: cssOptions
+      },
+      {
+        loader: require.resolve('less-loader')
       },
       {
         // Options for PostCSS as we reference these options twice
@@ -361,6 +365,14 @@ module.exports = function(webpackEnv) {
 
                 plugins: [
                   [
+                    'import',
+                    {
+                      libraryName: 'antd',
+                      libraryDirectory: 'es',
+                      style: 'css'
+                    }
+                  ],
+                  [
                     require.resolve('babel-plugin-named-asset-import'),
                     {
                       loaderMap: {
@@ -456,6 +468,7 @@ module.exports = function(webpackEnv) {
               // See https://github.com/webpack/webpack/issues/6571
               sideEffects: true
             },
+
             // Adds support for CSS Modules, but using SASS
             // using the extension .module.scss or .module.sass
             {
