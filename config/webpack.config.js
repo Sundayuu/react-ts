@@ -288,7 +288,7 @@ module.exports = function(webpackEnv) {
         .filter(ext => useTypeScript || !ext.includes('ts')),
       alias: {
         'react-native': 'react-native-web',
-        components: paths.appComponents
+        components: path.resolve(__dirname, './../src/components')
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
