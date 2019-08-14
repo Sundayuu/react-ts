@@ -49,8 +49,7 @@ const cssRegex = /\.(css|less)$/
 const cssModuleRegex = /\.module\.css$/
 const sassRegex = /\.(scss|sass)$/
 const sassModuleRegex = /\.module\.(scss|sass)$/
-const lessRegex = /\.(less)$/
-const lessModuleRegex = /\.module|antd\.less$/
+
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
 module.exports = function(webpackEnv) {
@@ -291,8 +290,8 @@ module.exports = function(webpackEnv) {
         .map(ext => `.${ext}`)
         .filter(ext => useTypeScript || !ext.includes('ts')),
       alias: {
-        'react-native': 'react-native-web',
-        components: path.resolve(__dirname, './../src/components')
+        'react-native': 'react-native-web'
+        // '@': path.resolve(__dirname, './../src')
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding

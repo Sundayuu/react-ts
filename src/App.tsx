@@ -6,7 +6,7 @@ const App: React.FC = () => {
     <div className="App">
       <header className="App-header">666</header>
       <Test />
-      <Button type="primary">点我</Button>
+      <Button>哈哈</Button>
     </div>
   )
 }
