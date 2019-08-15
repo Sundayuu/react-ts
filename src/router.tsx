@@ -4,7 +4,7 @@ const routes = [
 ]
 
 const homeRoutes = [
-  { path: '/login', asyncComponent: () => import('./pages/test02') }
+  { path: '/login', asyncComponent: () => import('./components/login') }
 ]
 
 export { routes, homeRoutes }

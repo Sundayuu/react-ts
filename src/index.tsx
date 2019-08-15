@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import * as serviceWorker from './serviceWorker'
-import { ConfigProvider } from 'antd'
+import { LocaleProvider } from 'antd'
 import { routeWithSubRoutes, history, noop } from 'utils'
 import { homeRoutes } from './router'
 import { Router, Route, Switch } from 'react-router-dom'
@@ -10,7 +10,7 @@ import Main from './App'
 import 'moment/locale/zh-cn'
 
 ReactDOM.render(
-  <ConfigProvider locale={zhCN}>
+  <LocaleProvider locale={zhCN}>
     <Router history={history}>
       <div>
         <Switch>
@@ -19,7 +19,7 @@ ReactDOM.render(
         </Switch>
       </div>
     </Router>
-  </ConfigProvider>,
+  </LocaleProvider>,
   document.getElementById('root')
 )
 

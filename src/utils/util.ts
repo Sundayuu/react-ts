@@ -186,16 +186,8 @@ export function FORMAT_YUAN(value, asMinus = false, showPlus = false) {
  * 清除缓存并跳转登录页
  */
 export function logout() {
-  const accountName = JSON.parse(sessionStorage.getItem(cache.LOGIN_DATA))
-    .accountName
   localStorage.removeItem(cache.LOGIN_DATA)
   sessionStorage.removeItem(cache.LOGIN_DATA)
-  sessionStorage.removeItem(cache.SYSTEM_BASE_CONFIG)
-  sessionStorage.removeItem(cache.LOGIN_MENUS)
-  sessionStorage.removeItem(cache.LOGIN_FUNCTIONS)
-  sessionStorage.removeItem(cache.FIRST_ACTIVE)
-  sessionStorage.removeItem(cache.SECOND_ACTIVE)
-  sessionStorage.removeItem(cache.THIRD_ACTIVE)
-  localStorage.removeItem(cache.DATA_BOARD.concat(accountName))
+
   history.push('/login')
 }
