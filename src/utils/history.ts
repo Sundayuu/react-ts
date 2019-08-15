@@ -1,8 +1,8 @@
 /**
  *创建HashHistroy
  */
-import createHistory from 'history/createBrowserHistory';
+// import createHistory from 'history';
 
-const history = createHistory();
+const history = require("history").createBrowserHistory();
 
 export default history;
