@@ -1,6 +1,6 @@
 const routes = [
   //首页
-  { path: '/home', exact: true, asyncComponent: () => import('./pages/test01') }
+  { path: '/', exact: true, asyncComponent: () => import('./pages/test01') }
 ]
 
 const homeRoutes = [
