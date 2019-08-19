@@ -66,7 +66,7 @@ class Login extends Component<any, any> {
             <Form.Item>
               <Button
                 type="primary"
-                // htmlType="submit"
+                htmlType="submit"
                 style={{ width: '100%' }}
                 className="login-form-button"
                 onClick={() => this.props.handleClick()}
@@ -77,7 +77,7 @@ class Login extends Component<any, any> {
           </Form>
           <div className="copyrigth">
             <p>© 2019-2020 上海木泰信息科技有限公司 </p>
-            <p>版本号：SBC V1.23.0</p>
+            <p>版本号：V1.0.0</p>
           </div>
         </div>
       </div>
