@@ -1,30 +1,52 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { getOrderList } from 'redux/actions/testAction'
-import { Form, Icon, Input, Button } from 'antd'
-import './login.less'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { loginAction } from 'redux/actions/loginActions';
+import { util } from 'utils';
+import { Form, Icon, Input, Button, message } from 'antd';
+import { history, cache } from 'utils';
+import { login } from 'axiosConfig';
+
+import './login.less';
+
+interface loginData {
+  userName: string;
+  password: string;
+}
 @connect(
   state => ({
-    orderItems: state.testReducer.orderItems
+    token: state.loginReducer.token
   }),
   dispatch => ({
-    handleClick: () => dispatch(getOrderList())
+    handleClick: params => dispatch(loginAction(params))
   })
 )
 class Login extends Component<any, any> {
-  form: any
+  form: any;
 
   handleSubmit = e => {
-    e.preventDefault()
-    this.props.form.validateFields((err, values) => {
+    e.preventDefault();
+    let base64 = new util.Base64();
+    this.props.form.validateFields(async (err, values: loginData) => {
       if (!err) {
-        console.log('Received values of form: ', values)
+        const loginParams: loginData = {
+          userName: base64.encode(values.userName),
+          password: base64.encode(values.password)
+        };
+        const res = (await login(loginParams)) as any;
+        console.log(res);
+        if (res.code === 200) {
+          this.props.handleClick(res.data);
+          sessionStorage.setItem(cache.LOGIN_DATA, JSON.stringify(res.data));
+          history.push('/');
+        } else {
+          message.error('网络错误');
+        }
       }
-    })
-  }
+    });
+  };
 
   render() {
-    const { getFieldDecorator } = this.props.form
+    const { getFieldDecorator } = this.props.form;
     return (
       <div className="login">
         <div className="login-content">
@@ -35,7 +57,7 @@ class Login extends Component<any, any> {
 
           <Form onSubmit={this.handleSubmit} className="login-form">
             <Form.Item>
-              {getFieldDecorator('username', {
+              {getFieldDecorator('userName', {
                 rules: [
                   { required: true, message: 'Please input your username!' }
                 ]
@@ -69,7 +91,6 @@ class Login extends Component<any, any> {
                 htmlType="submit"
                 style={{ width: '100%' }}
                 className="login-form-button"
-                onClick={() => this.props.handleClick()}
               >
                 Log in
               </Button>
@@ -81,7 +102,7 @@ class Login extends Component<any, any> {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
-export default Form.create()(Login)
+export default Form.create()(Login);

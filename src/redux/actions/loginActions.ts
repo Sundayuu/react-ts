@@ -1,17 +1,8 @@
 import { LOGIN } from './actionTypes';
 
-export const getOrderList = () => async dispatch => {
-  const data = {
-    test: [
-      {
-        id: 0,
-        data: '222'
-      }
-    ]
-  };
-
+export const loginAction = params => async dispatch => {
   dispatch({
     type: LOGIN,
-    data: data.test
+    token: params.token
   });
 };
