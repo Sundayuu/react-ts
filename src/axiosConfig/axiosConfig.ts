@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { message } from 'antd';
 import { history } from 'utils';
+import getBaseUrl from './axiosEnv';
 const service = axios.create({
-  baseURL: ' https://easy-mock.com/mock/5d5a65a0ec6a85619f33b678',
+  baseURL: getBaseUrl(),
   timeout: 10000,
   // `withCredentials` 表示跨域请求时是否需要使用凭证
   withCredentials: true,
@@ -29,8 +30,9 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     const res = response.data;
-    // 权限判断
+    // 权限判断,权限code待定
     if (res.code === 'F404') {
+      message.warning('对不起,你没有权限访问');
       history.push('/login');
     }
     return res;

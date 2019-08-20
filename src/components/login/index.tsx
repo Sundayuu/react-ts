@@ -12,10 +12,9 @@ interface loginData {
   userName: string;
   password: string;
 }
+
 @connect(
-  state => ({
-    token: state.loginReducer.token
-  }),
+  null,
   dispatch => ({
     handleClick: params => dispatch(loginAction(params))
   })

@@ -1,5 +1,6 @@
 import { cache, history } from 'utils';
-
+// import store from 'redux/store'
+// let token = store.getState()
 /**
  * 判断用户是否登陆
  * @returns {boolean}
