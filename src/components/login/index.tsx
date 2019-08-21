@@ -36,7 +36,7 @@ class Login extends Component<any, any> {
         if (res.code === 200) {
           this.props.handleClick(res.data);
           sessionStorage.setItem(cache.LOGIN_DATA, JSON.stringify(res.data));
-          history.push('/');
+          history.push('/home');
         } else {
           message.error('网络错误');
         }

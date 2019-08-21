@@ -1,15 +1,15 @@
-import React from 'react'
-import AsyncRoute, { Loader } from './async-router'
+import React from 'react';
+import AsyncRoute, { Loader } from './async-router';
 
-type TFnComponent = (...params: Array<any>) => any
+type TFnComponent = (...params: Array<any>) => any;
 
 export interface IRoute {
-  path: string
-  strict?: boolean
-  exact?: boolean
-  component?: React.ComponentClass<any> | TFnComponent
-  asyncComponent?: Loader
-  routes?: Array<IRoute>
+  path: string;
+  strict?: boolean;
+  exact?: boolean;
+  component?: React.ComponentClass<any> | TFnComponent;
+  asyncComponent?: Loader;
+  routes?: Array<IRoute>;
 }
 
 export default function routeWithSubRoutes(
@@ -17,14 +17,6 @@ export default function routeWithSubRoutes(
   handlePathMatched: Function
 ) {
   return routes.map((route, index) => {
-    //dev check
-    if (process.env.NODE_ENV !== 'production') {
-      if (route.asyncComponent === undefined) {
-        throw new Error(
-          `${route.path} can not find component or asyncComponent`
-        )
-      }
-    }
     return (
       <AsyncRoute
         key={index}
@@ -35,6 +27,6 @@ export default function routeWithSubRoutes(
         load={route.asyncComponent}
         handlePathMatched={handlePathMatched}
       />
-    )
-  })
+    );
+  });
 }
