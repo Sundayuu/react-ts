@@ -45,6 +45,7 @@ class Login extends Component<any, any> {
   };
 
   render() {
+    console.log(process.env);
     const { getFieldDecorator } = this.props.form;
     return (
       <div className="login">

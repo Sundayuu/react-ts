@@ -78,15 +78,15 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
     "start:dev": "node scripts/start.js dev",
     "start:test": "node scripts/start.js test",
     "start:pre": "node scripts/start.js pre",
-    "start:online": "node scripts/start.js prod",
-    "build:dev": "cross-env NODE_ENV=development node scripts/build.js dev",
-    "build:test": "cross-env NODE_ENV=development node scripts/build.js test",
-    "build:pre": "cross-env NODE_ENV=production node scripts/build.js pre",
-    "build:online": "cross-env NODE_ENV=production node scripts/build.js prod",
+    "start:online": "node scripts/start.js online",
+    "build": "node scripts/build.js",
+    "build:dev": "node scripts/build.js dev",
+    "build:test": "node scripts/build.js test",
+    "build:pre": "node scripts/build.js pre",
+    "build:online": "node scripts/build.js online",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {
