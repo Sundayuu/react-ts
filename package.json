@@ -78,15 +78,14 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "start:dev": "node scripts/start.js dev",
-    "start:test": "node scripts/start.js test",
-    "start:pre": "node scripts/start.js pre",
-    "start:online": "node scripts/start.js online",
-    "build": "node scripts/build.js",
-    "build:dev": "node scripts/build.js dev",
-    "build:test": "node scripts/build.js test",
-    "build:pre": "node scripts/build.js pre",
-    "build:online": "node scripts/build.js online",
+    "start:dev": "cross-env REACT_APP_API=dev node scripts/start.js",
+    "start:test": "cross-env REACT_APP_API=test node scripts/start.js",
+    "start:pre": "cross-env REACT_APP_API=pre node scripts/start.js",
+    "start:online": "cross-env REACT_APP_API=online node scripts/start.js",
+    "build:dev": "cross-env REACT_APP_API=dev node scripts/build.js",
+    "build:test": "cross-env REACT_APP_API=test node scripts/build.js",
+    "build:pre": "cross-env REACT_APP_API=pre node scripts/build.js",
+    "build:online": "cross-env REACT_APP_API=online node scripts/build.js",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {

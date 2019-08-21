@@ -1,80 +1,84 @@
-import React from 'react'
-import { Layout } from 'antd'
-import { routeWithSubRoutes } from 'utils'
-import { routes } from './router'
-const { Content } = Layout
-
+import React from 'react';
+import { Layout, Menu, Icon } from 'antd';
+import { routeWithSubRoutes } from 'utils';
+import { routes } from './router';
+const { Header, Sider, Content } = Layout;
+const { SubMenu } = Menu;
 export default class Main extends React.Component<any, any> {
-  _menu: any
+  _menu: any;
 
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       // 当前浏览器地址匹配的路由path
       matchedPath: ''
-    }
+    };
   }
 
   handlePathMatched = path => {
     this.setState({
       matchedPath: path
-    })
-  }
+    });
+  };
 
   componentDidUpdate() {
     // 加一层判断，避免报错影响子组件渲染
     if (document.getElementById('page-content')) {
-      document.getElementById('page-content').scrollTop = 0
+      document.getElementById('page-content').scrollTop = 0;
     }
   }
 
   render() {
     return (
-      <div>
+      <Layout style={{ height: '100vh' }}>
+        <Header style={{ background: '#fff', padding: '0 15px' }}>
+          <img
+            style={{
+              width: 120,
+              height: 34
+            }}
+            src={require('assets/img/logo.png')}
+            alt="logo"
+          />
+        </Header>
         <Layout>
-          {/*头部*/}
-
-          <Layout className="ant-layout-has-sider">
-            {/*左侧一级菜单*/}
-
-            {/*左侧二三级菜单*/}
-
-            {/*右侧主操作区域*/}
-            <Content>
-              <div style={styles.wrapper} id="page-content">
-                {routeWithSubRoutes(routes, this.handlePathMatched)}
-                <div style={styles.copyright}>
-                  © 2019-2020 上海木泰信息科技有限公司 版本号：
-                </div>
-              </div>
-            </Content>
-          </Layout>
+          <Sider>
+            <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+              <Menu.Item key="1">
+                <Icon type="user" />
+                <span>nav 1</span>
+              </Menu.Item>
+              <Menu.Item key="2">
+                <Icon type="video-camera" />
+                <span>nav 2</span>
+              </Menu.Item>
+              <SubMenu
+                key="sub1"
+                title={
+                  <span>
+                    <Icon type="user" />
+                    <span>User</span>
+                  </span>
+                }
+              >
+                <Menu.Item key="3">Tom</Menu.Item>
+                <Menu.Item key="4">Bill</Menu.Item>
+                <Menu.Item key="5">Alex</Menu.Item>
+              </SubMenu>
+            </Menu>
+          </Sider>
+          <Content
+            style={{
+              margin: '24px 16px',
+              padding: 24,
+              background: '#fff',
+              minHeight: 280
+            }}
+          >
+            {routeWithSubRoutes(routes, this.handlePathMatched)}
+          </Content>
         </Layout>
-      </div>
-    )
-  }
-
-  /**
-   * 头部的一级菜单刷新后,初始化左侧菜单的展开菜单状态
-   * @private
-   */
-  _onFirstActiveChange = () => {
-    this._menu._openKeysChange(['0'])
+      </Layout>
+    );
   }
 }
-
-const styles = {
-  wrapper: {
-    padding: 10,
-    backgroundColor: '#f5f5f5',
-    height: 'calc(100vh - 64px)',
-    position: 'relative',
-    overflowY: 'auto'
-  },
-  copyright: {
-    height: 48,
-    lineHeight: '60px',
-    textAlign: 'center',
-    color: '#999'
-  }
-} as any
